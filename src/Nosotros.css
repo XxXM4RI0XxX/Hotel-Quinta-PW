@@ -1,0 +1,42 @@
+.nosotros-main-container {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.nosotros-header-section {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.nosotros-title {
+    color: var(--reserve-bg);
+    border-bottom: 2px solid var(--accent); /* El detalle original */
+    display: inline-block;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.nosotros-intro-text {
+    line-height: 1.6;
+    font-size: 1.1rem;
+    color: var(--text);
+}
+
+.nosotros-grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    text-align: center;
+}
+
+.nosotros-card-original h3 {
+    color: var(--accent);
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.nosotros-card-original p {
+    line-height: 1.5;
+}
