@@ -5,6 +5,7 @@ import Habitaciones from './Habitaciones';
 import Nosotros from './Nosotros';
 import Contacto from './Contacto';
 import Reservaciones from './Reservaciones';
+import Consulta from './Consulta';
 import Footer from './footer'
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           {pagina === 'nosotros' && <Nosotros/>}
           {pagina === 'contacto' && <Contacto/>}
           {pagina === 'reservaciones' && <Reservaciones/>}
+          {pagina === 'consulta' && <Consulta setPagina={setPagina}/>}
         </main>
 
         <Footer />

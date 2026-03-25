@@ -29,7 +29,7 @@
   object-fit: cover;
 }
 
-/* Estilos del Modal que ya tenías */
+/* Estilos del Modal */
 .modal-overlay {
   position: fixed;
   top: 0; left: 0;
@@ -56,4 +56,44 @@
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+/* Alineación de los textos de la tarjeta con el botón "Ver Detalles" */
+.room-info h3,
+.room-info .price {
+    margin-left: 20px; /* Exactamente el mismo margen izquierdo que el botón */
+}
+
+.room-info h3 {
+    margin-top: 15px; /* Para que el texto no esté pegado a la foto de arriba */
+    margin-bottom: 5px; /* Un pequeño respiro entre el título y el precio */
+}
+
+/* Estilos del botón "Ver Detalles" */
+.btn-details {
+    background-color: var(--reserve-bg, #0b4a78); /* El azul principal del hotel */
+    color: white;
+    border: none;
+    
+    /* Tamaño reducido pero cómodo */
+    padding: 8px 18px; 
+    font-size: 0.95rem; 
+    
+    font-family: inherit;
+    font-weight: bold;
+    border-radius: 4px; /* Un redondeado sutil y elegante */
+    cursor: pointer;
+    transition: all 0.3s ease; /* Transición suave para el hover */
+    
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-bottom: 20px; 
+    display: inline-block; 
+}
+
+/* Efecto Hover uniforme con el resto de la página */
+.btn-details:hover {
+    background-color: var(--reserve-border, #093c61); /* Un azul más oscuro */
+    transform: translateY(-2px); /* Pequeño efecto de levante */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
 }

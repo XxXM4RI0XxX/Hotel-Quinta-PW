@@ -60,7 +60,7 @@ function Inicio({ setPagina }) {
       </section>
 
       <hr style={{ border: '1px solid rgba(0,0,0,0.1)', margin: '30px 0' }} />
-
+      {/* Sección de Reservación */}
       <section className="seccion-centrada">
         <h2>¿Listo para vivir la magia?</h2>
         <p>Asegura tu lugar en nuestro hotel hoy mismo.</p><br />
@@ -70,6 +70,20 @@ function Inicio({ setPagina }) {
           style={{ textDecoration: 'none', display: 'inline-block', cursor: 'pointer' }}
         >
           Reservar Ahora
+        </a>
+      </section>
+      {/* Sección de Consulta */}
+      <hr style={{ border: '1px solid rgba(0,0,0,0.1)', margin: '30px 0' }} />
+
+      <section className="seccion-centrada">
+        <h2>¿Ya tienes reservación? ¡Consúltala ahora!</h2>
+        <p>Revisa los detalles de tu estancia y mantén todo bajo control.</p><br />
+        <a 
+          onClick={() => setPagina('consulta')} 
+          className="btn-primario" 
+          style={{ textDecoration: 'none', display: 'inline-block', cursor: 'pointer' }}
+        >
+          Consultar Reservación
         </a>
       </section>
     </>
