@@ -19,6 +19,7 @@
   overflow: hidden;
   box-shadow: var(--shadow);
   transition: transform 0.3s ease;
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .room-card:hover { transform: translateY(-5px); }

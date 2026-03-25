@@ -16,11 +16,7 @@ function App() {
 
       <header className="hero-top">
         <img className="hero-logo" src="/images-src/logo.png" alt="Hotel Quinta Dalam" />
-      </header>
-
-      <div className="panel">
-        <header className="panel-header">
-          <nav className="nav">
+        <nav className="nav">
             <a onClick={() => setPagina('inicio')} className={pagina === 'inicio' ? 'active' : ''}>Inicio</a>
             <span className="nav-sep"></span>
             <a onClick={() => setPagina('habitaciones')} className={pagina === 'habitaciones' ? 'active' : ''}>Habitaciones</a>
@@ -29,7 +25,9 @@ function App() {
             <span className="nav-sep"></span>
             <a onClick={() => setPagina('contacto')} className={pagina === 'contacto' ? 'active' : ''}>Contacto</a>
           </nav>
-        </header>
+      </header>
+
+      <div className="panel">
 
         <main className="content">
           {pagina === 'inicio' && <Inicio setPagina={setPagina}/>}

@@ -1,26 +1,29 @@
-import React from 'react';
-
-// 1. Arreglo dinámico (Listo para ser reemplazado por el JSON de Alex)
-const habitacionesDestacadas = [
-  { 
-    id: 102, 
-    nombre: "Habitación 102 - Paracho", 
-    imagen: "/resources-tmp/IMG/h_paracho1.jpg" 
-  },
-  { 
-    id: 104, 
-    nombre: "Habitación 104 - Pátzcuaro", 
-    imagen: "/resources-tmp/IMG/h_patzcuaro1.jpg" 
-  }
-];
+import React, { useEffect, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import { Pagination } from 'swiper/modules';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import 'swiper/css';
 
 function Inicio({ setPagina }) {
+
+  const [habitaciones, setHabitaciones] = useState([]);
+
+  useEffect(() => {
+    fetch("/hab-img/hab_imgs.json")
+      .then(res => res.json())
+      .then(data => {
+        setHabitaciones(data.habs || []);
+      });
+  }, []);
+
   return (
     <>
       <section className="seccion-centrada">
         <h2>Tus próximas vacaciones mágicas te esperan con nosotros...</h2>
       </section>
-      
+
       <section className="fila-informativa">
         <div className="texto-info">
           <h3>¿Quieres salir de lo cotidiano?</h3>
@@ -38,21 +41,25 @@ function Inicio({ setPagina }) {
         <img src="/resources-tmp/IMG/hotel-fuera.jpg" alt="Vista exterior del hotel" className="img-info" />
       </section>
 
-      <section className="seccion-centrada">
+      <section className='seccion-centrada'>
         <h3>Habitaciones cómodas con temática de los pueblos mágicos de Michoacán</h3>
-        
-        {/* Elemento dinámico (El bucle .map, dibujará un div con foto y título por cada objeto existente en el arreglo habitacionesDestacadas): */}
-        {habitacionesDestacadas.map(hab => (
-          <div key={hab.id} className="habitacion-vista-rapida">
-            <h4>{hab.nombre}</h4>
-            <img src={hab.imagen} alt={hab.nombre} className="img-habitacion" />
-          </div>
-        ))}
-        
+
+        <br/><br/>
+
+        <Swiper modules={[Navigation, Pagination]}
+          navigation
+          pagination={{ clickable: true }}>
+          {habitaciones.map((img, i) => (
+            <SwiperSlide key={i}>
+              <img src={img} className="img-habitacion" />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
         <br /><br />
-        <a 
-          onClick={() => setPagina('habitaciones')} 
-          className="btn-secundario" 
+        <a
+          onClick={() => setPagina('habitaciones')}
+          className="btn-secundario"
           style={{ textDecoration: 'none', display: 'inline-block', cursor: 'pointer' }}
         >
           Ver Habitaciones
@@ -64,9 +71,9 @@ function Inicio({ setPagina }) {
       <section className="seccion-centrada">
         <h2>¿Listo para vivir la magia?</h2>
         <p>Asegura tu lugar en nuestro hotel hoy mismo.</p><br />
-        <a 
-          onClick={() => setPagina('reservaciones')} 
-          className="btn-primario" 
+        <a
+          onClick={() => setPagina('reservaciones')}
+          className="btn-primario"
           style={{ textDecoration: 'none', display: 'inline-block', cursor: 'pointer' }}
         >
           Reservar Ahora
