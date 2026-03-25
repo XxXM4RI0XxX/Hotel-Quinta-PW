@@ -7,7 +7,7 @@ function Habitaciones() {
   const [seleccionada, setSeleccionada] = useState(null);
 
   useEffect(() => {
-    fetch("/habitaciones.json") // 👈 importante
+    fetch("/habitaciones.json") // Conexión al archivo habitaciones.json
       .then(response => response.json())
       .then(data => {
         const base = data.habitaciones || [];
