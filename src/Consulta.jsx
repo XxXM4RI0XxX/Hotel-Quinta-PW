@@ -108,9 +108,26 @@ function Consulta({ setPagina }) {
             </div>
           )}
 
-          <button type="submit" className="btn-formulario btn-iluminado" style={{ display: 'block', margin: '0 auto', width: 'fit-content' }}>
-            Consultar Reservación
-          </button>
+          {estadoFormulario === 'error' && (
+            <div className="formulario__mensaje">
+              <p><b>Error:</b> Por favor rellena los datos correctamente.</p>
+            </div>
+          )}
+
+          {/* Contenedor de botones Consultar Reservación y Cancelar */}
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px', marginTop: '20px' }}>
+            <button type="submit" className="btn-formulario btn-iluminado">
+              Consultar Reservación
+            </button>
+
+            <button 
+              type="button" 
+              className="btn-formulario btn-cancelar" 
+              onClick={() => setPagina('inicio')}
+            >
+              Cancelar
+            </button>
+          </div>
 
           {/* 3. Mensaje movido hacia abajo y con más margen */}
           {estadoFormulario === 'exito-consulta' && (

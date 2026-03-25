@@ -37,7 +37,7 @@ function App() {
           {pagina === 'habitaciones' && <Habitaciones/>}
           {pagina === 'nosotros' && <Nosotros/>}
           {pagina === 'contacto' && <Contacto/>}
-          {pagina === 'reservaciones' && <Reservaciones/>}
+          {pagina === 'reservaciones' && <Reservaciones setPagina={setPagina}/>}
           {pagina === 'consulta' && <Consulta setPagina={setPagina}/>}
         </main>
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Reservaciones.css';
 
-function Reservaciones() {
+function Reservaciones({ setPagina }) {
   // Estados para los valores del formulario
   const [valores, setValores] = useState({
     usuario: '',
@@ -159,9 +159,23 @@ function Reservaciones() {
           </div>
         )}
 
-        <button type="submit" className={`btn-formulario ${valores.terminos ? 'btn-iluminado' : 'btn-apagado'}`} disabled={!valores.terminos}>
-          Confirmar Reservación
-        </button>
+        {/* Contenedor Flex para alinear los botones */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', marginTop: '20px' }}>
+          
+          <button type="submit" className={`btn-formulario ${valores.terminos ? 'btn-iluminado' : 'btn-apagado'}`} disabled={!valores.terminos}>
+            Confirmar Reservación
+          </button>
+
+          {/* Botón de cancelar */}
+          <button 
+            type="button" 
+            className="btn-formulario btn-cancelar" 
+            onClick={() => setPagina('inicio')}
+          >
+            Cancelar
+          </button>
+
+        </div>
 
         {/* Mensaje de éxito */}
         {formularioValido === true && (

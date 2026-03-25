@@ -135,8 +135,7 @@ select:focus {
     font-size: 1.1rem;
     font-weight: bold;
     transition: all 0.3s ease;
-    display: block;
-    margin: 0 auto;
+    display: inline-block;
     width: fit-content;
 }
 
