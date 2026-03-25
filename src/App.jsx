@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import Inicio from './Inicio'
 import Habitaciones from './Habitaciones';
@@ -10,6 +10,13 @@ import Footer from './footer'
 
 function App() {
   const [pagina, setPagina] = useState('inicio');
+  //Para subir el scroll suavemente al cambiar de sección
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' /* Efecto deslizante */
+    });
+  }, [pagina]);
 
   return (
     <div className="App">

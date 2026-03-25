@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import './Habitaciones.css';
 
 function Habitaciones() {
@@ -42,12 +43,19 @@ function Habitaciones() {
         ))}
       </div>
 
-      {seleccionada && (
+      {/* Se usa createPortal para que el modal se dibuje directamente sobre toda la pantalla */}
+      {seleccionada && createPortal(
         <div className="modal-overlay" onClick={() => setSeleccionada(null)}>
           <div className="modal-content" onClick={e => e.stopPropagation()}>
             <button className="modal-close" onClick={() => setSeleccionada(null)}>
               &times;
             </button>
+
+            <img 
+              src={seleccionada.imagen} 
+              alt={seleccionada.nombre} 
+              className="modal-image" 
+            />
 
             <h2>{seleccionada.nombre}</h2>
             <p className="modal-sub">{seleccionada.precio} por noche</p>
@@ -59,7 +67,8 @@ function Habitaciones() {
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body /* Para decirle a React que dibuje el modal en el body */
       )}
     </div>
   );
