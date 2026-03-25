@@ -34,6 +34,7 @@ input[type="text"],
 input[type="email"],
 input[type="tel"],
 input[type="date"],
+input[type="password"],
 select {
     width: 100%;
     padding: 12px;
@@ -82,3 +83,77 @@ select:focus {
 
 .btn-cancelar { background: #d32f2f; } /*Rojo para acciones destructivas*/
 .btn-cancelar:hover { background: #b71c1c; }
+
+/* Estilos de validación dinámica */
+/* Ocultar todos los mensajes de error por defecto */
+.formulario__input-error {
+    font-size: 13px;
+    color: #cc0000; /* Rojo de error */
+    margin-top: -15px;
+    margin-bottom: 15px;
+    display: none; /* Importante: se oculta hasta que haya un error */
+}
+
+/* Mostrar el mensaje de error SOLAMENTE cuando el grupo es incorrecto */
+.formulario__grupo-incorrecto .formulario__input-error {
+    display: block;
+}
+
+/* Colores de bordes y fondos dinámicos (El semáforo) */
+.formulario__grupo-correcto input {
+    border: 2px solid #1ed12d !important; /* Borde Verde */
+    background-color: rgba(30, 209, 45, 0.05);
+}
+
+.formulario__grupo-incorrecto input {
+    border: 2px solid #cc0000 !important; /* Borde Rojo */
+    background-color: rgba(204, 0, 0, 0.05);
+}
+
+/* Estilos para el cuadro de error general (cuando se intenta enviar vacío o mal el formulario) */
+.formulario__mensaje {
+    background: #f66060;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+/* Estilos para el mensaje de éxito al reservar */
+.formulario__mensaje-exito {
+    font-size: 16px;
+    color: #119200; /* Verde oscuro */
+    margin-top: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+/* Estilos para el botón dinámico */
+.btn-formulario {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.btn-apagado {
+    background-color: #cccccc;
+    color: #888888;
+    cursor: not-allowed; /* Muestra el cursor de "prohibido" */
+}
+
+.btn-iluminado {
+    background-color: var(--reserve-bg); /* Tu azul original */
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(11, 74, 120, 0.3);
+}
+
+.btn-iluminado:hover {
+    background-color: var(--reserve-border);
+    transform: translateY(-2px);
+}

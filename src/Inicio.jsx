@@ -1,5 +1,19 @@
 import React from 'react';
 
+// 1. Arreglo dinámico (Listo para ser reemplazado por el JSON de Alex)
+const habitacionesDestacadas = [
+  { 
+    id: 102, 
+    nombre: "Habitación 102 - Paracho", 
+    imagen: "/resources-tmp/IMG/h_paracho1.jpg" 
+  },
+  { 
+    id: 104, 
+    nombre: "Habitación 104 - Pátzcuaro", 
+    imagen: "/resources-tmp/IMG/h_patzcuaro1.jpg" 
+  }
+];
+
 function Inicio({ setPagina }) {
   return (
     <>
@@ -27,15 +41,14 @@ function Inicio({ setPagina }) {
       <section className="seccion-centrada">
         <h3>Habitaciones cómodas con temática de los pueblos mágicos de Michoacán</h3>
         
-        <div className="habitacion-vista-rapida">
-          <h4>Habitación 102 - Paracho</h4>
-          <img src="/resources-tmp/IMG/h_paracho1.jpg" alt="Habitación Paracho" className="img-habitacion" />
-        </div>
+        {/* Elemento dinámico (El bucle .map, dibujará un div con foto y título por cada objeto existente en el arreglo habitacionesDestacadas): */}
+        {habitacionesDestacadas.map(hab => (
+          <div key={hab.id} className="habitacion-vista-rapida">
+            <h4>{hab.nombre}</h4>
+            <img src={hab.imagen} alt={hab.nombre} className="img-habitacion" />
+          </div>
+        ))}
         
-        <div className="habitacion-vista-rapida">
-          <h4>Habitación 104 - Pátzcuaro</h4>
-          <img src="/resources-tmp/IMG/h_patzcuaro1.jpg" alt="Habitación Patzcuaro" className="img-habitacion" />
-        </div>
         <br /><br />
         <a 
           onClick={() => setPagina('habitaciones')} 
