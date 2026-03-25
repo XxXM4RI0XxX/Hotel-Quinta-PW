@@ -35,6 +35,7 @@ input[type="email"],
 input[type="tel"],
 input[type="date"],
 input[type="password"],
+input[type="number"],
 select {
     width: 100%;
     padding: 12px;
@@ -45,6 +46,10 @@ select {
     font-size: 1rem;
     background-color: #fafafa;
     transition: all 0.3s ease;
+}
+/* Para que el campo número de huéspedes sea más corto */
+input[type="number"] {
+    width: 100px;
 }
 
 /*Efecto cuando el usuario da clic en una caja de texto (Focus)*/
