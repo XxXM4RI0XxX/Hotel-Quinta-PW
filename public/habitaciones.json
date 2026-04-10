@@ -1,0 +1,67 @@
+{
+  "habitaciones": [
+    {
+      "id": 101,
+      "nombre": "101 - Tlalpujahua",
+      "precio": "$1,800",
+      "imagen": "/hab-img/h_tlalpujahua.jpg",
+      "desc": "Inspirada en el pueblo de la eterna Navidad. Cuenta con detalles en cantera y una atmósfera acogedora."
+    },
+    {
+      "id": 102,
+      "nombre": "102 - Paracho",
+      "precio": "$1,500",
+      "imagen": "/hab-img/h_paracho1.jpg",
+      "desc": "Habitación dedicada a la capital de la guitarra. Incluye decoraciones de madera fina y excelente iluminación."
+    },
+    {
+      "id": 103,
+      "nombre": "103 - Angangueo",
+      "precio": "$1,700",
+      "imagen": "/hab-img/h_angangueo.jpg",
+      "desc": "Rinde homenaje a la mariposa monarca. Un espacio tranquilo con vistas al jardín interior."
+    },
+    {
+      "id": 104,
+      "nombre": "104 - Pátzcuaro",
+      "precio": "$2,200",
+      "imagen": "/hab-img/h_patzcuaro1.jpg",
+      "desc": "Nuestra suite principal con temática del lago. Espaciosa y con acabados artesanales de alta calidad."
+    },
+    {
+      "id": 105,
+      "nombre": "105 - Santa Clara del Cobre",
+      "precio": "$1,900",
+      "imagen": "/hab-img/h_santa-clara-cobre.jpg",
+      "desc": "Decorada con auténticas piezas de cobre martillado. Refleja la calidez y el brillo de este pueblo mágico."
+    },
+    {
+      "id": 106,
+      "nombre": "106 - Cuitzeo",
+      "precio": "$1,600",
+      "imagen": "/hab-img/h_cuitzeo.jpg",
+      "desc": "Un rincón de paz inspirado en la laguna. Tonos frescos y diseño minimalista rústico."
+    },
+    {
+      "id": 107,
+      "nombre": "107 - Jiquilpan",
+      "precio": "$1,550",
+      "imagen": "/hab-img/h_jiquilpan.jpg",
+      "desc": "La habitación de los jacarandás. Un espacio lleno de luz y colores suaves para un descanso total."
+    },
+    {
+      "id": 108,
+      "nombre": "108 - Tzintzuntzan",
+      "precio": "$2,000",
+      "imagen": "/hab-img/h_tzintzuntzan.jpg",
+      "desc": "Inspirada en el lugar de colibríes. Posee una decoración ancestral y una cama king size."
+    },
+    {
+      "id": 109,
+      "nombre": "109 - Tacámbaro",
+      "precio": "$1,750",
+      "imagen": "/hab-img/h_tacambaro.jpg",
+      "desc": "El balcón de tierra caliente. Frescura y confort se unen en esta habitación temática."
+    }
+  ]
+}
