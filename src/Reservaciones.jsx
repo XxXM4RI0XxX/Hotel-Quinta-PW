@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Reservaciones.css';
 
 function Reservaciones({ setPagina }) {
@@ -9,6 +9,7 @@ function Reservaciones({ setPagina }) {
     password: '',
     correo: '',
     telefono: '',
+    habitacion: sessionStorage.getItem('habitacionPreseleccionada') || '',
     terminos: false
   });
 
@@ -18,10 +19,16 @@ function Reservaciones({ setPagina }) {
     nombre: null,
     password: null,
     correo: null,
-    telefono: null
+    telefono: null,
+    habitacion: sessionStorage.getItem('habitacionPreseleccionada') ? true : null
   });
 
   const [formularioValido, setFormularioValido] = useState(null);
+  
+  //Para borrar la memoria de sesión de la habitación seleccionada al entrar al formulario
+  useEffect(() => {
+    sessionStorage.removeItem('habitacionPreseleccionada');
+  }, []);
 
   // Expresiones regulares
   const expresiones={
@@ -134,14 +141,36 @@ function Reservaciones({ setPagina }) {
           <input type="date" required />
           <label>Fecha de Salida:</label>
           <input type="date" required />
-          <label>Tipo de Habitación:</label>
-          <select>
-            <option value="estandar">Estandar (Simple)</option>
-            <option value="doble">Doble (Familiar)</option>
-            <option value="suite">Suite Imperial</option>
+          <div className={obtenerClaseGrupo('habitacion')}>
+          <label>Habitación seleccionada:</label>
+          <select 
+            name="habitacion" 
+            value={valores.habitacion} 
+            onChange={validarCampo} 
+            onBlur={validarCampo} 
+            required
+          >
+            <option value="" disabled>- Elige una habitación -</option>
+            <option value="101 - Tzintzuntzan">101 - Tzintzuntzan</option>
+            <option value="102 - Paracho">102 - Paracho</option>
+            <option value="103 - Yunuen">103 - Yunuen</option>
+            <option value="104 - Pátzcuaro">104 - Pátzcuaro</option>
+            <option value="105 - Coeneo">105 - Coeneo</option>
+            <option value="106 - Janitzio">106 - Janitzio</option>
+            <option value="201 - Suite Quencio">201 - Suite Quencio</option>
+            <option value="202 - Morelia">202 - Morelia</option>
+            <option value="203 - Tacámbaro">203 - Tacámbaro</option>
+            <option value="204 - Uruapan">204 - Uruapan</option>
+            <option value="205 - Tlalpujahua">205 - Tlalpujahua</option>
+            <option value="206 - Cuitzeo">206 - Cuitzeo</option>
+            <option value="207 - Cuanajo">207 - Cuanajo</option>
+            <option value="301 - Angangueo">301 - Angangueo</option>
+            <option value="302 - Santa Clara del Cobre">302 - Santa Clara del Cobre</option>
           </select>
+          <p className="formulario__input-error">Por favor, selecciona una habitación válida.</p>
+          </div>
           <label>Número de Huéspedes:</label>
-          <input type="number" min="1" max="6" placeholder="1" required />
+          <input type="number" min="1" max="4" placeholder="1" required />
         </fieldset>
         
         {/* Checkbox necesario para la validación final */}

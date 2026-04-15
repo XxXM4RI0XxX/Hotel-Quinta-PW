@@ -1,41 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import './Habitaciones.css';
 
-function Habitaciones() {
+function Habitaciones({setPagina}) {
   const [habitaciones, setHabitaciones] = useState([]);
   const [seleccionada, setSeleccionada] = useState(null);
 
   useEffect(() => {
-    fetch("/habitaciones.json") // Conexión al archivo habitaciones.json
-      .then(response => response.json())
-      .then(data => {
-        const base = data.habitaciones || [];
-
-        const guardadas = JSON.parse(localStorage.getItem("habitaciones")) || [];
-
-        setHabitaciones([...base, ...guardadas]);
-      })
-      .catch(error => console.error("Error:", error));
+    fetch("/habitaciones.json")
+      .then(res => res.json())
+      .then(data => setHabitaciones(data.habitaciones || []))
+      .catch(err => console.error("Error al cargar habitaciones:", err));
   }, []);
 
   return (
     <div className="catalogo-container">
-      <h1 className="headline">Habitaciones mágicas para crear recuerdos mágicos</h1>
-
+      <h1 className="headline">Elige tu rincón mágico en Quinta Dalam</h1>
+      
       <div className="room-grid">
         {habitaciones.map(hab => (
           <div key={hab.id} className="room-card">
             <img src={hab.imagen} alt={hab.nombre} className="img-habitacion" />
-
             <div className="room-info">
               <h3>{hab.nombre}</h3>
-              <p className="price">{hab.precio}</p>
-
-              <button
-                className="btn-details"
-                onClick={() => setSeleccionada(hab)}
-              >
+              <p className="price">{hab.precio} / noche</p>
+              <button className="btn-details" onClick={() => setSeleccionada(hab)}>
                 Ver detalles
               </button>
             </div>
@@ -43,32 +37,71 @@ function Habitaciones() {
         ))}
       </div>
 
-      {/* Se usa createPortal para que el modal se dibuje directamente sobre toda la pantalla */}
       {seleccionada && createPortal(
         <div className="modal-overlay" onClick={() => setSeleccionada(null)}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setSeleccionada(null)}>
-              &times;
-            </button>
+          <div className="modal-expandido" onClick={e => e.stopPropagation()}>
+            
+            <div className="modal-layout">
+              {/* Lado Izquierdo: Galería */}
+              <div className="modal-gallery">
+                <Swiper 
+                  modules={[Navigation, Pagination]} 
+                  navigation 
+                  pagination={{ clickable: true }}
+                  loop={true}
+                  className="swiper-modal"
+                >
+                  <SwiperSlide><img src={seleccionada.imagen} alt="Principal" /></SwiperSlide>
+                  {seleccionada.imagenes.map((img, idx) => (
+                    <SwiperSlide key={idx}><img src={img} alt={`Detalle ${idx + 1}`} /></SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
 
-            <img 
-              src={seleccionada.imagen} 
-              alt={seleccionada.nombre} 
-              className="modal-image" 
-            />
+              {/* Lado Derecho: Info */}
+              <div className="modal-details-panel">
+                <button className="modal-close-btn" onClick={() => setSeleccionada(null)}>&times;</button>
+                
+                <h2>{seleccionada.nombre}</h2>
+                
+                <div className="room-badges">
+                  <span className="badge-cap">👤 Capacidad: {seleccionada.capacidad} {seleccionada.capacidad === 1 ? 'persona' : 'personas'}</span>
+                  <span className="badge-price">{seleccionada.precio}</span>
+                </div>
 
-            <h2>{seleccionada.nombre}</h2>
-            <p className="modal-sub">{seleccionada.precio} por noche</p>
-            <p className="modal-desc">{seleccionada.desc}</p>
+                <div className="detail-section">
+                  <h4>Descripción</h4>
+                  <p>{seleccionada.desc}</p>
+                </div>
 
-            <div className="modal-actions">
-              <button className="btn-ok" onClick={() => setSeleccionada(null)}>
-                Cerrar
-              </button>
+                <div className="detail-section">
+                  <h4>Amenidades incluídas</h4>
+                  <ul className="amenidades-grid">
+                    {seleccionada.amenidades.map((am, i) => (
+                      <li key={i}>✨ {am}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="modal-action-footer">
+                  <button 
+                    className="btn-close-modal" 
+                    onClick={() => {
+                      // 1. Se guarda el nombre de la habitación en la memoria del navegador
+                      sessionStorage.setItem('habitacionPreseleccionada', seleccionada.nombre);
+                      // 2. Se cierra el modal
+                      setSeleccionada(null);
+                      // 3. Redirección al formulario Reservaciones
+                      setPagina('reservaciones');
+                    }}>
+                    Reservar Ahora
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>,
-        document.body /* Para decirle a React que dibuje el modal en el body */
+        document.body
       )}
     </div>
   );

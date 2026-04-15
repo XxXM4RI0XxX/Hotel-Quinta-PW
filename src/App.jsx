@@ -82,7 +82,7 @@ function App() {
       <div className="panel">
         <main className="content">
           {pagina === 'inicio' && <Inicio setPagina={setPagina} />}
-          {pagina === 'habitaciones' && <Habitaciones />}
+          {pagina === 'habitaciones' && <Habitaciones setPagina={setPagina} />}
           {pagina === 'nosotros' && <Nosotros />}
           {pagina === 'reservaciones' && <Reservaciones setPagina={setPagina} />}
           {pagina === 'consulta' && <Consulta setPagina={setPagina} />}
