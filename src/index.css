@@ -33,6 +33,7 @@ body {
   min-height: 100vh;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   color: var(--text);
+  overscroll-behavior: none;
 }
 
 /*Contenedor Principal (El panel "translúcido")*/
@@ -63,13 +64,18 @@ body {
 .hero-top {
   position: sticky;
   top: 0;
+  margin: 0;
   padding: 20px 35px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  backdrop-filter: blur(10px);
   background: rgb(80, 64, 54);
   z-index: 1000;
+  transition: all 0.2s ease;
+}
+
+.hero-top.shrink {
+  padding: 1px 1px;
 }
 
 .hero-logo {
@@ -127,7 +133,7 @@ body {
 }
 
 .btn-buscar {
-  flex: 0; /* 🔥 importante */
+  flex: 0;
 }
 
 .btn-buscar {
@@ -147,6 +153,12 @@ body {
 .btn-buscar:hover {
   background: #1a252f;
   transform: translateY(-1px);
+}
+
+.booking-bar.shrink .btn-buscar {
+  padding: 8px 15px;
+  font-size: 14px;
+  border-radius: 20px; /* más compacto */
 }
 
 /*Barra de navegación*/

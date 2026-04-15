@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { DayPicker } from "react-day-picker";
 import Inicio from './Inicio'
 import Habitaciones from './Habitaciones';
 import Nosotros from './Nosotros';
@@ -6,14 +7,32 @@ import Contacto from './Contacto';
 import Reservaciones from './Reservaciones';
 import Consulta from './Consulta';
 import Footer from './footer'
-
-
+import "react-day-picker/dist/style.css";
 
 function App() {
+
+  //Day picker import
+  function RangePicker() {
+  const [range, setRange] = useState({
+  from: undefined,
+  to: undefined
+  });
+    return (
+      <DayPicker
+        mode="range"
+        selected={range}
+        onSelect={setRange}
+      />
+    );
+  }
 
   const bgRef = useRef(null);
 
   const [pagina, setPagina] = useState('inicio');
+
+  //Detectar scroll
+  const [scrolled, setScrolled] = useState(false);
+
   //Para subir el scroll suavemente al cambiar de sección
   useEffect(() => {
     window.scrollTo({
@@ -21,6 +40,15 @@ function App() {
       behavior: 'smooth' /* Efecto deslizante */
     });
   }, [pagina]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50); // 🔥 umbral
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,10 +68,10 @@ function App() {
     <div className="App">
       <div className="bg" ref={bgRef} aria-hidden="true"></div>
 
-      <header className="hero-top">
-        <img className="hero-logo" src="/images-src/logo.png" alt="Hotel Quinta Dalam" />
+      <header className={`hero-top ${scrolled ? "shrink" : ""}`}>
+        <img className="hero-logo" src={scrolled ? "/images-src/Logo min.png" : "/images-src/logo.png"} alt="Hotel Quinta Dalam" />
 
-        <div className="booking-bar">
+        <div className={`booking-bar ${scrolled ? "shrink" : ""}`}>
           <div className="item">
             <span className="label">Registro de entrada</span>
             <span className="value">sáb, 11 abr</span>
