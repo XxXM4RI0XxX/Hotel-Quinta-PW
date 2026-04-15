@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react'
 import Inicio from './Inicio'
 import Habitaciones from './Habitaciones';
 import Nosotros from './Nosotros';
-import Contacto from './Contacto';
 import Reservaciones from './Reservaciones';
 import Consulta from './Consulta';
 import Footer from './footer'
@@ -76,8 +75,6 @@ function App() {
             <button onClick={() => setPagina('habitaciones')} className={pagina === 'habitaciones' ? 'active' : ''}>Habitaciones</button>
             <span className="nav-sep"></span>
             <button onClick={() => setPagina('nosotros')} className={pagina === 'nosotros' ? 'active' : ''}>Nosotros</button>
-            <span className="nav-sep"></span>
-            <button onClick={() => setPagina('contacto')} className={pagina === 'contacto' ? 'active' : ''}>Contacto</button>
           </nav>
         </div>
       </header>
@@ -87,7 +84,6 @@ function App() {
           {pagina === 'inicio' && <Inicio setPagina={setPagina} />}
           {pagina === 'habitaciones' && <Habitaciones />}
           {pagina === 'nosotros' && <Nosotros />}
-          {pagina === 'contacto' && <Contacto />}
           {pagina === 'reservaciones' && <Reservaciones setPagina={setPagina} />}
           {pagina === 'consulta' && <Consulta setPagina={setPagina} />}
         </main>

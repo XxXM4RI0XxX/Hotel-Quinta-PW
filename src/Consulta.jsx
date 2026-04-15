@@ -176,7 +176,7 @@ function Consulta({ setPagina }) {
 
           {estadoFormulario === 'error-no-encontrado' && (
             <div className="formulario__mensaje" style={{ backgroundColor: '#ff9800' }}>
-              <p>No encontramos coincidencias, por favor, <a href="#" onClick={(e) => { e.preventDefault(); setPagina('contacto'); }} style={{ color: '#fff', textDecoration: 'underline', fontWeight: 'bold' }}>comunícate con nosotros</a>.</p>
+              <p>No encontramos coincidencias, por favor, <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'}); }} style={{ color: '#fff', textDecoration: 'underline', fontWeight: 'bold' }}>comunícate con nosotros</a>.</p>
             </div>
           )}
 
@@ -184,7 +184,7 @@ function Consulta({ setPagina }) {
             <div className="formulario__mensaje-exito" style={{ padding: '15px', backgroundColor: 'rgba(30, 209, 45, 0.1)', border: '2px solid #1ed12d', borderRadius: '6px', marginBottom: '20px' }}>
               <p style={{ margin: '0 0 10px 0', fontSize: '1.1rem' }}>✅ La información de reservación fue enviada al correo electrónico registrado.</p>
               <p style={{ fontSize: '0.9rem', color: '#555', margin: 0, fontWeight: 'normal' }}>
-                * En caso de no tener acceso al correo, por favor <a href="#" onClick={(e) => { e.preventDefault(); setPagina('contacto'); }} style={{ color: 'var(--reserve-bg)', fontWeight: 'bold', textDecoration: 'underline' }}>comunícate al hotel</a> directamente.
+                * En caso de no tener acceso al correo, por favor <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'}); }} style={{ color: 'var(--reserve-bg)', fontWeight: 'bold', textDecoration: 'underline' }}>comunícate al hotel</a> directamente.
               </p>
             </div>
           )}
