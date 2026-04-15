@@ -2,66 +2,153 @@
   "habitaciones": [
     {
       "id": 101,
-      "nombre": "101 - Tlalpujahua",
+      "nombre": "101 - Tzintzuntzan",
       "precio": "$1,800",
-      "imagen": "/hab-img/h_tlalpujahua.jpg",
-      "desc": "Inspirada en el pueblo de la eterna Navidad. Cuenta con detalles en cantera y una atmósfera acogedora."
+      "capacidad": 2,
+      "amenidades": ["Wi-Fi", "Cama King", "Cafetera", "Vista al patio"],
+      "imagen": "/hab-img/h_tzintzuntzan.jpg",
+      "imagenes": ["/hab-img/h_img-1.jpg", "/hab-img/h_img-2.jpg", "/hab-img/h_img-3.jpg", "/hab-img/h_img-4.jpg"],
+      "desc": "Inspirada en el lugar de colibríes. Un espacio ancestral con toques de lujo moderno y cantera artesanal."
     },
     {
       "id": 102,
       "nombre": "102 - Paracho",
       "precio": "$1,500",
-      "imagen": "/hab-img/h_paracho1.jpg",
-      "desc": "Habitación dedicada a la capital de la guitarra. Incluye decoraciones de madera fina y excelente iluminación."
+      "capacidad": 2,
+      "amenidades": ["Wi-Fi", "Guitarra de exhibición", "Escritorio", "Smart TV"],
+      "imagen": "/hab-img/h_paracho.jpg",
+      "imagenes": ["/hab-img/h_img-1.jpg", "/hab-img/h_img-2.jpg", "/hab-img/h_img-3.jpg", "/hab-img/h_img-4.jpg"],
+      "desc": "La capital de la guitarra en su habitación. Madera fina y acústica perfecta para un descanso profundo."
     },
     {
       "id": 103,
-      "nombre": "103 - Angangueo",
+      "nombre": "103 - Yunuen",
       "precio": "$1,700",
-      "imagen": "/hab-img/h_angangueo.jpg",
-      "desc": "Rinde homenaje a la mariposa monarca. Un espacio tranquilo con vistas al jardín interior."
+      "capacidad": 3,
+      "amenidades": ["Wi-Fi", "Balcón", "Climatización", "Cama Matrimonial"],
+      "imagen": "/hab-img/h_yunuen.jpg",
+      "imagenes": ["/hab-img/h_img-1.jpg", "/hab-img/h_img-2.jpg", "/hab-img/h_img-3.jpg", "/hab-img/h_img-4.jpg"],
+      "desc": "Refleja la tranquilidad de la isla del lago. Colores suaves y una brisa constante que invita a la calma."
     },
     {
       "id": 104,
       "nombre": "104 - Pátzcuaro",
       "precio": "$2,200",
-      "imagen": "/hab-img/h_patzcuaro1.jpg",
-      "desc": "Nuestra suite principal con temática del lago. Espaciosa y con acabados artesanales de alta calidad."
+      "capacidad": 4,
+      "amenidades": ["Wi-Fi", "2 Camas Queen", "Minibar", "Chimenea", "Caja fuerte"],
+      "imagen": "/hab-img/h_patzcuaro.jpg",
+      "imagenes": ["/hab-img/h_img-1.jpg", "/hab-img/h_img-2.jpg", "/hab-img/h_img-3.jpg", "/hab-img/h_img-4.jpg"],
+      "desc": "Nuestra Suite Imperial. Techos altos con vigas de madera y toda la majestuosidad del pueblo principal."
     },
     {
       "id": 105,
-      "nombre": "105 - Santa Clara del Cobre",
-      "precio": "$1,900",
-      "imagen": "/hab-img/h_santa-clara-cobre.jpg",
-      "desc": "Decorada con auténticas piezas de cobre martillado. Refleja la calidez y el brillo de este pueblo mágico."
+      "nombre": "105 - Coeneo",
+      "precio": "$1,400",
+      "capacidad": 2,
+      "amenidades": ["Wi-Fi", "Luz Natural", "Set de té", "Espejo artesanal"],
+      "imagen": "/hab-img/h_coeneo.jpg",
+      "imagenes": ["/hab-img/h_img-1.jpg", "/hab-img/h_img-2.jpg", "/hab-img/h_img-3.jpg", "/hab-img/h_img-4.jpg"],
+      "desc": "Simplicidad y calidez. Un rincón rústico diseñado para el viajero que busca autenticidad michoacana."
     },
     {
       "id": 106,
-      "nombre": "106 - Cuitzeo",
+      "nombre": "106 - Janitzio",
+      "precio": "$1,900",
+      "capacidad": 2,
+      "amenidades": ["Wi-Fi", "Cama King", "Cuadros temáticos", "Cafetera"],
+      "imagen": "/hab-img/h_janitzio.jpg",
+      "imagenes": ["/hab-img/h_img-1.jpg", "/hab-img/h_img-2.jpg", "/hab-img/h_img-3.jpg", "/hab-img/h_img-4.jpg"],
+      "desc": "La centinela del lago. Una habitación con vistas elevadas y una decoración inspirada en la pesca tradicional."
+    },
+    {
+      "id": 201,
+      "nombre": "201 - Suite Quencio",
+      "precio": "$2,500",
+      "capacidad": 4,
+      "amenidades": ["Wi-Fi Pro", "Jacuzzi", "Sala de estar", "Batas de seda"],
+      "imagen": "/hab-img/h_quencio.jpg",
+      "imagenes": ["/hab-img/h_img-1.jpg", "/hab-img/h_img-2.jpg", "/hab-img/h_img-3.jpg", "/hab-img/h_img-4.jpg"],
+      "desc": "Lujo absoluto en honor a la leyenda. Espacios amplios y amenidades premium para una estancia inolvidable."
+    },
+    {
+      "id": 202,
+      "nombre": "202 - Morelia",
+      "precio": "$1,850",
+      "capacidad": 2,
+      "amenidades": ["Wi-Fi", "Cama King", "Acabados de cantera", "Smart TV 55\""],
+      "imagen": "/hab-img/h_morelia.jpg",
+      "imagenes": ["/hab-img/h_img-1.jpg", "/hab-img/h_img-2.jpg", "/hab-img/h_img-3.jpg", "/hab-img/h_img-4.jpg"],
+      "desc": "Elegancia colonial. Detalles en cantera rosa que evocan la arquitectura del centro histórico de Morelia."
+    },
+    {
+      "id": 203,
+      "nombre": "203 - Tacámbaro",
       "precio": "$1,600",
-      "imagen": "/hab-img/h_cuitzeo.jpg",
-      "desc": "Un rincón de paz inspirado en la laguna. Tonos frescos y diseño minimalista rústico."
-    },
-    {
-      "id": 107,
-      "nombre": "107 - Jiquilpan",
-      "precio": "$1,550",
-      "imagen": "/hab-img/h_jiquilpan.jpg",
-      "desc": "La habitación de los jacarandás. Un espacio lleno de luz y colores suaves para un descanso total."
-    },
-    {
-      "id": 108,
-      "nombre": "108 - Tzintzuntzan",
-      "precio": "$2,000",
-      "imagen": "/hab-img/h_tzintzuntzan.jpg",
-      "desc": "Inspirada en el lugar de colibríes. Posee una decoración ancestral y una cama king size."
-    },
-    {
-      "id": 109,
-      "nombre": "109 - Tacámbaro",
-      "precio": "$1,750",
+      "capacidad": 2,
+      "amenidades": ["Wi-Fi", "Balcón", "Hamaca", "Ventilador"],
       "imagen": "/hab-img/h_tacambaro.jpg",
-      "desc": "El balcón de tierra caliente. Frescura y confort se unen en esta habitación temática."
+      "imagenes": ["/hab-img/h_img-1.jpg", "/hab-img/h_img-2.jpg", "/hab-img/h_img-3.jpg", "/hab-img/h_img-4.jpg"],
+      "desc": "El balcón de tierra caliente. Frescura y color en un ambiente que te transporta a los huertos michoacanos."
+    },
+    {
+      "id": 204,
+      "nombre": "204 - Uruapan",
+      "precio": "$1,750",
+      "capacidad": 3,
+      "amenidades": ["Wi-Fi", "Muebles de laca", "Set de café", "Regadera tipo lluvia"],
+      "imagen": "/hab-img/h_uruapan.jpg",
+      "imagenes": ["/hab-img/h_img-1.jpg", "/hab-img/h_img-2.jpg", "/hab-img/h_img-3.jpg", "/hab-img/h_img-4.jpg"],
+      "desc": "La capital del aguacate. Un espacio vibrante con artesanías de laca y textiles de la región del Cupatitzio."
+    },
+    {
+      "id": 205,
+      "nombre": "205 - Tlalpujahua",
+      "precio": "$1,800",
+      "capacidad": 2,
+      "amenidades": ["Wi-Fi", "Vidrio soplado", "Cama King", "Iluminación cálida"],
+      "imagen": "/hab-img/h_tlalpujahua.jpg",
+      "imagenes": ["/hab-img/h_img-1.jpg", "/hab-img/h_img-2.jpg", "/hab-img/h_img-3.jpg", "/hab-img/h_img-4.jpg"],
+      "desc": "Ambiente navideño todo el año. Decorada con esferas artesanales y una calidez que abraza al huésped."
+    },
+    {
+      "id": 206,
+      "nombre": "206 - Cuitzeo",
+      "precio": "$1,550",
+      "capacidad": 2,
+      "amenidades": ["Wi-Fi", "Vista a la laguna", "Escritorio", "Sillón"],
+      "imagen": "/hab-img/h_cuitzeo.jpg",
+      "imagenes": ["/hab-img/h_img-1.jpg", "/hab-img/h_img-2.jpg", "/hab-img/h_img-3.jpg", "/hab-img/h_img-4.jpg"],
+      "desc": "Serenidad junto al convento. Tonos pasteles y una atmósfera de contemplación para el descanso total."
+    },
+    {
+      "id": 207,
+      "nombre": "207 - Cuanajo",
+      "precio": "$1,600",
+      "capacidad": 2,
+      "amenidades": ["Wi-Fi", "Muebles tallados", "Cama Queen", "Perchero de madera"],
+      "imagen": "/hab-img/h_cuanajo.jpg",
+      "imagenes": ["/hab-img/h_img-1.jpg", "/hab-img/h_img-2.jpg", "/hab-img/h_img-3.jpg", "/hab-img/h_img-4.jpg"],
+      "desc": "El arte de la madera. Cada mueble ha sido tallado a mano por artesanos locales, creando una pieza única."
+    },
+    {
+      "id": 301,
+      "nombre": "301 - Angangueo",
+      "precio": "$2,100",
+      "capacidad": 4,
+      "amenidades": ["Wi-Fi", "Calefacción", "Camas Matrimoniales", "Vistas de montaña"],
+      "imagen": "/hab-img/h_angangueo.jpg",
+      "imagenes": ["/hab-img/h_img-1.jpg", "/hab-img/h_img-2.jpg", "/hab-img/h_img-3.jpg", "/hab-img/h_img-4.jpg"],
+      "desc": "Tierra de mariposas. Un espacio acogedor con calefacción central para las noches frescas de la sierra."
+    },
+    {
+      "id": 302,
+      "nombre": "302 - Santa Clara del Cobre",
+      "precio": "$2,000",
+      "capacidad": 2,
+      "amenidades": ["Wi-Fi", "Tina de cobre", "Espejo martillado", "Cafetera"],
+      "imagen": "/hab-img/h_santa-clara-cobre.jpg",
+      "imagenes": ["/hab-img/h_img-1.jpg", "/hab-img/h_img-2.jpg", "/hab-img/h_img-3.jpg", "/hab-img/h_img-4.jpg"],
+      "desc": "Brillo y tradición. Detalles en cobre martillado que reflejan la luz y la historia de este pueblo artesano."
     }
   ]
 }
