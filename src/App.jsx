@@ -28,7 +28,7 @@ function App() {
 
     setCalendarPos({
       left: rect.left,
-      top: rect.bottom + window.scrollY
+      top: rect.bottom
     });
 
     setActiveField(type);
@@ -64,6 +64,14 @@ function App() {
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
+
+  //Dropdown
+
+  const [personas, setPersonas] = useState(1);
+  const [showPersonas, setShowPersonas] = useState(false);
+
+
+
   //Detectar scroll
   const [scrolled, setScrolled] = useState(false);
 
@@ -124,9 +132,26 @@ function App() {
 
           <div className="divider"></div>
 
-          <div className="item">
+          <div className="item" onClick={() => setShowPersonas(!showPersonas)}>
             <span className="label">Personas</span>
-            <span className="value">#</span>
+            <span className="value">{personas} persona{personas > 1 && "s"}</span>
+
+            {showPersonas && (
+              <div className="dropdown-personas">
+                {[1, 2, 3, 4].map((num) => (
+                  <div
+                    key={num}
+                    className="option"
+                    onClick={() => {
+                      setPersonas(num);
+                      setShowPersonas(false);
+                    }}
+                  >
+                    {num} persona{num > 1 && "s"}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="divider"></div>
@@ -136,7 +161,7 @@ function App() {
         </div>
 
         <div className="panel-header">
-          <nav className="nav">
+          <nav className={`nav ${scrolled ? "shrink" : ""}`}>
             <button onClick={() => setPagina('inicio')} className={pagina === 'inicio' ? 'active' : ''}>Inicio</button>
             <span className="nav-sep"></span>
             <button onClick={() => setPagina('habitaciones')} className={pagina === 'habitaciones' ? 'active' : ''}>Habitaciones</button>

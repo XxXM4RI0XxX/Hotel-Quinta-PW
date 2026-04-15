@@ -33,7 +33,7 @@ body {
   min-height: 100vh;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   color: var(--text);
-  overscroll-behavior: none;
+  overscroll-behavior-block: auto;
 }
 
 /*Contenedor Principal (El panel "translúcido")*/
@@ -66,6 +66,7 @@ body {
   top: 0;
   margin: 0;
   padding: 20px 35px;
+  height: 150px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -75,14 +76,16 @@ body {
 }
 
 .hero-top.shrink {
-  padding: 1px 1px;
+  height: 70px;
 }
 
 .hero-logo {
-  height: 100px;
+  height: 80px;
   width: auto;
   display: block;
- /* filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 5));*/
+  position: absolute;
+  left: 12%;
+  transform: translateX(-50%);
 }
 
 /*Barra de reservación rápida*/
@@ -97,8 +100,16 @@ body {
   border-radius: 10px;
   padding: 10px 15px;
 
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   max-width: 1000px;
+
+  position: absolute;
+  left: 45%;
+  transform: translateX(-50%);
+}
+
+.booking-bar.shrink .booking-bar{
+  padding: none;
 }
 
 .item {
@@ -110,15 +121,26 @@ body {
   position: relative;
 }
 
+.booking-bar.shrink .item{
+  min-height: 20px;
+}
+
 .item:hover {
   cursor: pointer;
-  background: rgba(0,0,0,0.05);
+  background: rgba(0, 0, 0, 0.05);
   border-radius: 8px;
 }
 
 .label {
   font-size: 12px;
   color: #888;
+  transition: all 0.2s ease;
+}
+
+.booking-bar.shrink .label {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
 }
 
 .value {
@@ -131,6 +153,10 @@ body {
   width: 1px;
   height: 45px;
   background: #ddd;
+}
+
+.booking-bar.shrink .divider {
+  height: 25px;
 }
 
 .btn-buscar {
@@ -159,18 +185,38 @@ body {
 .booking-bar.shrink .btn-buscar {
   padding: 8px 15px;
   font-size: 14px;
-  border-radius: 20px; /* más compacto */
+  border-radius: 20px;
 }
 
 .calendar-popup {
   position: fixed;
-  top: 100%;
-  left: 0;
   background: white;
   padding: 10px;
   border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   z-index: 1000;
+}
+
+.dropdown-personas {
+  position: absolute;
+  top: 100%;
+  left: 0;
+
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+  padding: 10px;
+  z-index: 1000;
+}
+
+.option {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.option:hover {
+  background: #eee;
 }
 
 /*Barra de navegación*/
@@ -179,11 +225,17 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
-  padding: 10px 16px;
+
   background: rgba(255, 255, 255, .0);
   border-radius: 6px;
-  flex-wrap: wrap;  
+  flex-wrap: wrap;
+  position: absolute;
+  top: 40%;
+  right: 35px;
+}
+
+.nav.shrink {
+  top: 25%;
 }
 
 button {
