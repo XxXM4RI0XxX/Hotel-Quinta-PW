@@ -107,6 +107,7 @@ body {
   gap: 8px;
   min-width: 150px;
   transition: background 0.2s ease;
+  position: relative;
 }
 
 .item:hover {
@@ -159,6 +160,17 @@ body {
   padding: 8px 15px;
   font-size: 14px;
   border-radius: 20px; /* más compacto */
+}
+
+.calendar-popup {
+  position: fixed;
+  top: 100%;
+  left: 0;
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  z-index: 1000;
 }
 
 /*Barra de navegación*/
