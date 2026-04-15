@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { DayPicker } from 'react-day-picker';
+import 'react-day-picker/dist/style.css';
+import { es } from 'date-fns/locale';
+import { format } from 'date-fns';
 import './Reservaciones.css';
 
 function Reservaciones({ setPagina }) {
@@ -21,6 +25,12 @@ function Reservaciones({ setPagina }) {
     correo: null,
     telefono: null,
     habitacion: sessionStorage.getItem('habitacionPreseleccionada') ? true : null
+  });
+
+  // Estado para las fechas de react-day-picker
+  const [rangoFechas, setRangoFechas] = useState({
+    from: undefined,
+    to: undefined
   });
 
   const [formularioValido, setFormularioValido] = useState(null);
@@ -59,26 +69,23 @@ function Reservaciones({ setPagina }) {
   };
 
   //Función al enviar el formulario
-  const handleSubmit=(e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      valido.usuario &&
-      valido.nombre &&
-      valido.password &&
-      valido.correo &&
-      valido.telefono &&
-      valores.terminos
-    ) {
-      setFormularioValido(true);
-      //Aquí se enviarán los datos a la base de datos cuando esté implementada
 
-      //Limpiar formulario después de envío exitoso
-      setTimeout(() => {
-        setValores({usuario: '', nombre: '', password: '', correo: '', telefono: '', terminos: false});
-        setValido({usuario: null, nombre: null, password: null, correo: null, telefono: null});
-        setFormularioValido(null);
-      }, 4000);
-    } else {//Formulario no válido
+    // 1. Verificamción de que todos los campos de texto y el select estén en verde (true)
+    const camposTextoValidos = valido.usuario && valido.nombre && valido.password && valido.correo && valido.telefono && valido.habitacion;
+
+    // 2. Verificación de que el calendario tenga una fecha de entrada y una de salida
+    const fechasSeleccionadas = rangoFechas?.from && rangoFechas?.to;
+
+    // 3. Se evalúa todo junto: Campos + Fechas + Checkbox de términos
+    if (camposTextoValidos && fechasSeleccionadas && valores.terminos) {
+      setFormularioValido(true);
+      
+      // Aquí en un futuro enviarás los datos (valores y rangoFechas) a tu base de datos
+      console.log("Reservación exitosa del", rangoFechas.from, "al", rangoFechas.to);
+      
+    } else {
       setFormularioValido(false);
     }
   };
@@ -132,6 +139,40 @@ function Reservaciones({ setPagina }) {
             <label>Teléfono:</label>
             <input type="tel" name="telefono" placeholder="4431234567" value={valores.telefono} onChange={validarCampo} onKeyUp={validarCampo} onBlur={validarCampo} required />
             <p className="formulario__input-error">El teléfono debe tener exactamente 10 números (marcación a 10 dígitos).</p>
+          </div>
+        </fieldset>
+
+        <fieldset style={{ textAlign: 'center' }}>
+          <legend>Fechas de tu Estancia</legend>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
+            
+            {/* El Calendario Interactivo */}
+            <div style={{ background: 'white', padding: '15px', borderRadius: '10px', boxShadow: '0 4px 10px rgba(0,0,0,0.05)' }}>
+              <DayPicker
+                mode="range"
+                selected={rangoFechas}
+                onSelect={setRangoFechas}
+                locale={es} // Traduce a español
+                disabled={{ before: new Date() }} // Desactiva días en el pasado
+                numberOfMonths={window.innerWidth > 768 ? 2 : 1} // Muestra 2 meses en PC, 1 en móvil
+              />
+            </div>
+
+            {/* Retroalimentación Visual de Fechas */}
+            <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap', justifyContent: 'center' }}>
+              <p>
+                <strong>Check-in:</strong><br/>
+                <span style={{ color: rangoFechas?.from ? 'var(--reserve-bg)' : '#999' }}>
+                  {rangoFechas?.from ? format(rangoFechas.from, "PPP", { locale: es }) : "Selecciona llegada"}
+                </span>
+              </p>
+              <p>
+                <strong>Check-out:</strong><br/>
+                <span style={{ color: rangoFechas?.to ? 'var(--reserve-bg)' : '#999' }}>
+                  {rangoFechas?.to ? format(rangoFechas.to, "PPP", { locale: es }) : "Selecciona salida"}
+                </span>
+              </p>
+            </div>
           </div>
         </fieldset>
 
