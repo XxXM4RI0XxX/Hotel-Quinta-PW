@@ -7,8 +7,16 @@ const apiService = {
             throw new Error(`Error en la petición: ${response.status} ${response.statusText1}`);
         }
         return await response.json();
+    },
+    //KAN-16: Métodos para visualizar elementos
+    getHabitaciones: async () => {//Para obtener todas las habitaciones del catálogo
+        const response = await fetch(`${BASE_URL}/habitaciones`);
+        return await apiService.handleResponse(response);
+    },
+    getHabitacionById: async(id) => {//Para obtener una habitación específica por su ID
+        const response = await fetch(`${BASE_URL}/habitaciones/${id}`);
+        return await apiService.handleResponse(response);
     }
-    //Aquí se agregarán las funciones y métodos para los siguientes tickets, KAN-16 y KAN-17
 
 };
 export default apiService;
