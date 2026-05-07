@@ -1,4 +1,4 @@
-const BASE_URL = 'https://localhost:5173/api'; //Definición de la URL base para las solicitudes a la API
+const BASE_URL = 'https://localhost:8080/api'; //Definición de la URL base para las solicitudes a la API
 
 // Función para evaluar la respuesta del servidor y manejar errores
 const apiService = {
