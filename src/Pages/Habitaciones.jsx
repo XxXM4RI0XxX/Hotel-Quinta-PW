@@ -5,7 +5,7 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import './Habitaciones.css';
+import '../Desing/Habitaciones.css';
 
 function Habitaciones({setPagina}) {
   const [habitaciones, setHabitaciones] = useState([]);

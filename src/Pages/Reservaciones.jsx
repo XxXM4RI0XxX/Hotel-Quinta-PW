@@ -3,7 +3,7 @@ import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import { es } from 'date-fns/locale';
 import { format } from 'date-fns';
-import './Reservaciones.css';
+import '../Desing/Reservaciones.css';
 
 function Reservaciones({ setPagina }) {
   // Estados para los valores del formulario

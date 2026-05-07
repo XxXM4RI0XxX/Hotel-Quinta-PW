@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Reservaciones.css'; 
+import '../Desing/Reservaciones.css'; 
 
 function Consulta({ setPagina }) {
   const [modo, setModo] = useState('consulta'); 

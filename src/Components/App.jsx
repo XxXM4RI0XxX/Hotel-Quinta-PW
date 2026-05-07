@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 import { DayPicker } from "react-day-picker";
-import Inicio from './Inicio'
-import Habitaciones from './Habitaciones';
-import Nosotros from './Nosotros';
-import Reservaciones from './Reservaciones';
-import Consulta from './Consulta';
-import Footer from './footer'
+import Inicio from '../Pages/Inicio'
+import Habitaciones from '../Pages/Habitaciones';
+import Nosotros from '../Pages/Nosotros';
+import Reservaciones from '../Pages/Reservaciones';
+import Consulta from '../Pages/Consulta';
+import Footer from '../Components/footer'
 import "react-day-picker/dist/style.css";
 
 function App() {
