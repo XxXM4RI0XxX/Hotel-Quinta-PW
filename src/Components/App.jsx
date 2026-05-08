@@ -5,6 +5,10 @@ import Habitaciones from '../Pages/Habitaciones';
 import Nosotros from '../Pages/Nosotros';
 import Reservaciones from '../Pages/Reservaciones';
 import Consulta from '../Pages/Consulta';
+import Login from '../Pages/Login'
+import Registro from '../Pages/Registro';
+import Perfil from '../Pages/Perfil';
+import Admin from '../Pages/Admin';
 import Footer from '../Components/footer'
 import "react-day-picker/dist/style.css";
 
@@ -68,7 +72,6 @@ function App() {
 
   const [personas, setPersonas] = useState(1);
   const [showPersonas, setShowPersonas] = useState(false);
-
 
 
   //Detectar scroll
@@ -166,6 +169,14 @@ function App() {
             <button onClick={() => setPagina('habitaciones')} className={pagina === 'habitaciones' ? 'active' : ''}>Habitaciones</button>
             <span className="nav-sep"></span>
             <button onClick={() => setPagina('nosotros')} className={pagina === 'nosotros' ? 'active' : ''}>Nosotros</button>
+            <span className="nav-sep"></span>
+            <button onClick={() => setPagina('login')} className={pagina === 'login' ? 'active' : ''}>Iniciar sesión</button>
+            <span className="nav-sep"></span>
+            <button onClick={() => setPagina('registro')} className={pagina === 'registro' ? 'active' : ''}>Registro</button>
+            <span className="nav-sep"></span>
+            <button onClick={() => setPagina('perfil')} className={pagina === 'perfil' ? 'active' : ''}>Perfil</button>
+            <span className="nav-sep"></span>
+            <button onClick={() => setPagina('admin')} className={pagina === 'admin' ? 'active' : ''}>Admin</button>
           </nav>
         </div>
 
@@ -198,6 +209,10 @@ function App() {
           {pagina === 'nosotros' && <Nosotros />}
           {pagina === 'reservaciones' && <Reservaciones setPagina={setPagina} />}
           {pagina === 'consulta' && <Consulta setPagina={setPagina} />}
+          {pagina === 'login' && <Login setPagina={setPagina} />}
+          {pagina === 'registro' && <Registro setPagina={setPagina} />}
+          {pagina === 'perfil' && <Perfil />}
+          {pagina === 'admin' && <Admin />}
         </main>
 
         <Footer />
