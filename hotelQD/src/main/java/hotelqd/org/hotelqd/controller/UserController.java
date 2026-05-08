@@ -51,7 +51,7 @@ public class UserController {
     // EDITAR USUARIO (ADMIN)
     // =======================
     @PutMapping("/{id}")
-    public ResponseEntity<?> editar(@PathVariable Long id, @RequestBody User user) {
+    public ResponseEntity<?> editar(@PathVariable Integer id, @RequestBody User user) {
         try {
             User u = service.actualizar(id, user);
             return ResponseEntity.ok(u);
@@ -65,7 +65,7 @@ public class UserController {
     // ELIMINAR USUARIO (ADMIN)
     // =======================
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable Long id) {
+    public ResponseEntity<?> eliminar(@PathVariable Integer id) {
         try {
             service.eliminar(id);
             return ResponseEntity.ok("Usuario eliminado correctamente");

@@ -43,7 +43,8 @@ public class UserService {
     // =======================
     // ACTUALIZAR USUARIO
     // =======================
-    public User actualizar(Long id, User userActualizado) throws Exception {
+    // CORRECCIÓN: Se cambió Long por Integer
+    public User actualizar(Integer id, User userActualizado) throws Exception { 
         Optional<User> optional = repository.findById(id);
         if (!optional.isPresent()) {
             throw new Exception("User no encontrado");
@@ -63,7 +64,8 @@ public class UserService {
     // =======================
     // ELIMINAR USUARIO
     // =======================
-    public void eliminar(Long id) throws Exception {
+    // CORRECCIÓN: Se cambió Long por Integer
+    public void eliminar(Integer id) throws Exception { 
         if (!repository.existsById(id)) {
             throw new Exception("User no encontrado");
         }
@@ -76,6 +78,7 @@ public class UserService {
     public boolean existeUser(String username) {
         return repository.existsByUsername(username);
     }
+    
     // =======================
     // INICIAR SESIÓN
     // =======================
@@ -93,5 +96,4 @@ public class UserService {
         
         return user; // Si llega aquí, las credenciales son válidas
     }
-
 }

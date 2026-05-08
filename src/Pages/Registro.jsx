@@ -67,7 +67,7 @@ function Registro({ setPagina }) {
             const userData = {
                 username: data.usuario,
                 name: data.nombre,
-                last_name: data.apellidos,
+                lastName: data.apellidos,
                 mail: data.correo,
                 password: data.password,
                 phone: data.telefono,
