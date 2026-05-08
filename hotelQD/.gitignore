@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Archivos de configuración local (Credenciales de BD)
+application-local.properties

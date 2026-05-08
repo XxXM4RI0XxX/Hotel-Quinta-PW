@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import apiService from '../services/api';
 
 const registroSchema = z.object({
     usuario: z.string().min(3, 'Nombre de usuario mínimo 3 caracteres'),
@@ -60,13 +61,36 @@ function Registro({ setPagina }) {
         resolver: zodResolver,
     });
 
-    const onSubmit = (data) => {
-        setSubmittedData(data);
-        reset();
+    const onSubmit = async (data) => {
+        try {
+            // Se mapean/traducen los datos de React al formato que espera Java
+            const userData = {
+                username: data.usuario,
+                name: data.nombre,
+                lastName: data.apellidos,
+                mail: data.correo,
+                password: data.password,
+                phone: data.telefono,
+                promotions: data.promociones
+            };
+
+            // Se envían los datos al Backend
+            const respuesta = await apiService.registrarUsuario(userData);
+            
+            // Si Java responde con éxito, se muestra el mensaje y limpia el formulario
+            console.log("Usuario creado en BD:", respuesta);
+            setSubmittedData(data);
+            reset();
+            
+        } catch (error) {
+            // Si el backend rechaza la petición (ej. el usuario ya existe)
+            console.error("Error al registrar:", error);
+            alert("Error al registrar: " + error.message);
+        }
     };
 
     return (
-        <div className="Form registro-form">
+        <div className="Form registro-form" style={{ marginTop: '50px', marginBottom: '60px', maxWidth: '800px', marginInline: 'auto', padding: '0 20px' }}>
             <h2>Crear nuevo usuario</h2>
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
 
@@ -100,7 +124,7 @@ function Registro({ setPagina }) {
                     Quiero recibir promociones por correo
                 </label>
 
-                <button type="submit" disabled={isSubmitting}>
+                <button type="submit" className="btn-primario" disabled={isSubmitting}>
                     {isSubmitting ? 'Registrando...' : 'Crear cuenta'}
                 </button>
             </form>

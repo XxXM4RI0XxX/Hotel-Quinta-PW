@@ -51,7 +51,7 @@ public class UserController {
     // EDITAR USUARIO (ADMIN)
     // =======================
     @PutMapping("/{id}")
-    public ResponseEntity<?> editar(@PathVariable Long id, @RequestBody User user) {
+    public ResponseEntity<?> editar(@PathVariable Integer id, @RequestBody User user) {
         try {
             User u = service.actualizar(id, user);
             return ResponseEntity.ok(u);
@@ -65,13 +65,27 @@ public class UserController {
     // ELIMINAR USUARIO (ADMIN)
     // =======================
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable Long id) {
+    public ResponseEntity<?> eliminar(@PathVariable Integer id) {
         try {
             service.eliminar(id);
             return ResponseEntity.ok("Usuario eliminado correctamente");
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body("Error al eliminar user");
+        }
+    }
+    // =======================
+    // INICIAR SESIÓN (Acceso)
+    // =======================
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody User credenciales) {
+        try {
+            // Mandamos a llamar la lógica que acabamos de crear en el Service
+            User userAutenticado = service.login(credenciales.getUsername(), credenciales.getPassword());
+            return ResponseEntity.ok(userAutenticado);
+        } catch (Exception e) {
+            // Si la contraseña está mal, devolvemos un Error 401 (No Autorizado)
+            return ResponseEntity.status(401).body(e.getMessage());
         }
     }
 }
