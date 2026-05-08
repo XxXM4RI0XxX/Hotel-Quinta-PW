@@ -1,24 +1,29 @@
-const BASE_URL = 'http://localhost:8080/api'; //Definición de la URL base para las solicitudes a la API
+// src/services/api.js
 
-// Función para evaluar la respuesta del servidor y manejar errores
+const BASE_URL = 'http://localhost:8080/api'; // URL para las habitaciones (próximamente)
+const USERS_URL = 'http://localhost:8080/users'; // URL para el backend de Alejandro
+
 const apiService = {
+    // Función mejorada para evitar crashes con respuestas de texto plano
     handleResponse: async (response) => {
         if (!response.ok) {
             throw new Error(`Error en la petición: ${response.status} ${response.statusText}`);
         }
-        return await response.json();
+        const text = await response.text();
+        return text ? JSON.parse(text) : {}; // Si hay texto, lo hace JSON. Si no, devuelve objeto vacío.
     },
 
-    //KAN-16: Métodos para visualizar elementos
-    getHabitaciones: async () => {//Para obtener todas las habitaciones del catálogo
+    // ==========================================
+    // KAN-16 y 17: MÉTODOS DE HABITACIONES
+    // ==========================================
+    getHabitaciones: async () => {
         const response = await fetch(`${BASE_URL}/habitaciones`);
         return await apiService.handleResponse(response);
     },
-    getHabitacionById: async(id) => {//Para obtener una habitación específica por su ID
+    getHabitacionById: async(id) => {
         const response = await fetch(`${BASE_URL}/habitaciones/${id}`);
         return await apiService.handleResponse(response);
     },
-    //KAN-17: Métodos para modificar y quitar elementos
     updateHabitacion: async (id, datosActualizados) => {
         const response = await fetch(`${BASE_URL}/habitaciones/${id}`, {
             method: 'PUT',
@@ -27,12 +32,42 @@ const apiService = {
         });
         return await apiService.handleResponse(response);
     },
-    //Método para eliminar un registro de la base de datos
     deleteHabitacion: async (id) => {
         const response = await fetch(`${BASE_URL}/habitaciones/${id}`, {
-            method: 'DELETE' // Se especifica el método HTTP DELETE para eliminar el recurso
+            method: 'DELETE' 
         });
+        return await apiService.handleResponse(response);
+    },
+
+    // ==========================================
+    // MÓDULO DE USUARIOS (La parte de Alejandro)
+    // ==========================================
+    
+    // Método para crear un nuevo usuario (POST)
+    registrarUsuario: async (datosUsuario) => {
+        const response = await fetch(USERS_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(datosUsuario) // Se convierte el formulario de React a JSON
+        });
+        return await apiService.handleResponse(response);
+    },
+
+    // Método para iniciar sesión
+    loginUsuario: async (credenciales) => {
+        const response = await fetch(`${USERS_URL}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(credenciales)
+        });
+        return await apiService.handleResponse(response);
+    },
+
+    // Método para pedir la lista de todos los usuarios (GET)
+    getUsuarios: async () => {
+        const response = await fetch(USERS_URL);
         return await apiService.handleResponse(response);
     }
 };
+
 export default apiService;

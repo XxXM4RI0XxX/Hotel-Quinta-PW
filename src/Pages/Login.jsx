@@ -15,7 +15,7 @@ function Login() {
     }
 
     return (
-        <div className='Form'>
+        <div className='Form' style={{ marginTop: '50px', marginBottom: '60px' }}>
             <form onSubmit={handleData}>
 
                 <label htmlFor="mail">Nombre:</label>
@@ -36,7 +36,7 @@ function Login() {
                     required
                 ></input>
 
-                <button type="submit">Enviar</button>
+                <button type="submit" className="btn-primario">Enviar</button>
             </form>
         </div>
     );

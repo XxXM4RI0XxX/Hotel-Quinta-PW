@@ -76,5 +76,22 @@ public class UserService {
     public boolean existeUser(String username) {
         return repository.existsByUsername(username);
     }
+    // =======================
+    // INICIAR SESIÓN
+    // =======================
+    public User login(String username, String passwordPlana) throws Exception {
+        Optional<User> optional = repository.findByUsername(username);
+        if (!optional.isPresent()) {
+            throw new Exception("Usuario no encontrado");
+        }
+        
+        User user = optional.get();
+        // El passwordEncoder compara el texto de React con el Hash de la BD
+        if (!passwordEncoder.matches(passwordPlana, user.getPassword())) {
+            throw new Exception("Contraseña incorrecta");
+        }
+        
+        return user; // Si llega aquí, las credenciales son válidas
+    }
 
 }
