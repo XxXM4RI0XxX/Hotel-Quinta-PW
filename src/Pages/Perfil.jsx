@@ -94,6 +94,7 @@ function Perfil({ usuarioLogueado, setUsuarioLogueado }) {
     const secciones = [
         { id: 'perfil', label: 'Perfil' },
         { id: 'editar', label: 'Editar Perfil' },
+        { id: 'sesion', label: 'Sesión' },
         { id: 'pago', label: 'Métodos de Pago' },
         { id: 'config', label: 'Configuración' },
     ];
@@ -275,6 +276,53 @@ function Perfil({ usuarioLogueado, setUsuarioLogueado }) {
                                 </button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            )}
+
+            {seccionActiva === 'sesion' && (
+                <div className="perfil-content">
+                    <div className="perfil-header">
+                        <h1>Información de Sesión</h1>
+                        <p>Detalles sobre tu sesión activa</p>
+                    </div>
+
+                    <div className="perfil-card">
+                        <div className="sesion-info">
+                            <div className="sesion-item">
+                                <div className="sesion-icon">🔐</div>
+                                <div className="sesion-content">
+                                    <p className="sesion-label">Estado de la sesión</p>
+                                    <p className="sesion-value">Activa</p>
+                                </div>
+                            </div>
+
+                            <div className="sesion-item">
+                                <div className="sesion-icon">⏰</div>
+                                <div className="sesion-content">
+                                    <p className="sesion-label">Sesión expira en</p>
+                                    <p className="sesion-value">7 días de inactividad</p>
+                                </div>
+                            </div>
+
+                            <div className="sesion-item">
+                                <div className="sesion-icon">🚪</div>
+                                <div className="sesion-content">
+                                    <p className="sesion-label">Cerrar sesión</p>
+                                    <button
+                                        className="btn-cerrar-sesion"
+                                        onClick={() => {
+                                            if (window.confirm('¿Estás seguro de que quieres cerrar la sesión?')) {
+                                                setUsuarioLogueado(null);
+                                                window.location.reload();
+                                            }
+                                        }}
+                                    >
+                                        Cerrar Sesión
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}

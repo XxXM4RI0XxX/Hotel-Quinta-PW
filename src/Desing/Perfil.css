@@ -649,6 +649,77 @@ input:checked+.toggle-slider:before {
     gap: 1rem;
 }
 
+/* ===== SECCIÓN DE SESIÓN ===== */
+.sesion-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.sesion-item {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.2rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.sesion-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sesion-icon {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.sesion-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    flex: 1;
+}
+
+.sesion-label {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+    font-weight: 500;
+}
+
+.sesion-value {
+    font-size: 1rem;
+    color: #333;
+    margin: 0;
+    font-weight: 600;
+}
+
+.btn-cerrar-sesion {
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+}
+
+.btn-cerrar-sesion:hover {
+    background-color: #cc3333;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 68, 68, 0.3);
+}
+
 .btn-security {
     background: linear-gradient(135deg, #ff9500 0%, #ff8800 100%);
     color: #333;

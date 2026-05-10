@@ -116,13 +116,31 @@ const apiService = {
             .select(buildUserSelection())
             .eq('username', username)
             .eq('password', hashedPassword)
-            .single();
+            .maybeSingle();
 
-        if (error || !data) {
-            throw new Error('Usuario o contraseña incorrectos');
+        if (data) {
+            return data;
         }
 
-        return data;
+        // Fallback: si existen registros antiguos con contraseña en texto plano,
+        // permite iniciar sesión mientras se migran esos usuarios.
+        const { data: plainData, error: plainError } = await supabase
+            .from(TABLE)
+            .select(buildUserSelection())
+            .eq('username', username)
+            .eq('password', password)
+            .maybeSingle();
+
+        if (plainData) {
+            return plainData;
+        }
+
+        if (error || plainError) {
+            // Si hay un error real de base de datos, se puede consultar en la consola.
+            console.warn('Login query errors:', { hashedError: error, plainError });
+        }
+
+        throw new Error('Usuario o contraseña incorrectos');
     },
 
     async getUsuarioPorId(user_id) {
