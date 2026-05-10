@@ -1,53 +1,66 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../Desing/Admin.css';
+import apiService from '../services/api';
 
-function Admin() {
+function Admin({ usuarioLogueado }) {
     const [seccionActiva, setSeccionActiva] = useState('usuarios');
-
-    // Estado para usuarios
-    const [usuarios, setUsuarios] = useState([
-        { id: 1, nombre: 'María García', email: 'maria.garcia@email.com', estado: 'activo', fecha: '2024-01-15' },
-        { id: 2, nombre: 'Juan López', email: 'juan.lopez@email.com', estado: 'activo', fecha: '2024-02-20' },
-        { id: 3, nombre: 'Ana Martínez', email: 'ana.martinez@email.com', estado: 'suspendido', fecha: '2024-03-10' },
-    ]);
-
-    // Estado para reservaciones
+    const [usuarios, setUsuarios] = useState([]);
+    const [loadingUsuarios, setLoadingUsuarios] = useState(false);
+    const [adminError, setAdminError] = useState('');
     const [reservaciones] = useState([
         { id: 1, usuario: 'María García', habitacion: 'Habitación Deluxe', entrada: '2024-05-15', salida: '2024-05-20', estado: 'confirmada' },
         { id: 2, usuario: 'Juan López', habitacion: 'Habitación Premium', entrada: '2024-05-18', salida: '2024-05-25', estado: 'confirmada' },
         { id: 3, usuario: 'Ana Martínez', habitacion: 'Habitación Estándar', entrada: '2024-06-01', salida: '2024-06-05', estado: 'pendiente' },
     ]);
-
-    // Estado para habitaciones
     const [habitaciones, setHabitaciones] = useState([
         { id: 1, nombre: 'Habitación Estándar', tipo: 'Estándar', capacidad: 2, precio: 80 },
         { id: 2, nombre: 'Habitación Deluxe', tipo: 'Deluxe', capacidad: 2, precio: 120 },
         { id: 3, nombre: 'Habitación Premium', tipo: 'Premium', capacidad: 4, precio: 180 },
     ]);
-
-    // Estado para formulario de nueva habitación
     const [nuevaHabitacion, setNuevaHabitacion] = useState({ nombre: '', tipo: '', capacidad: 2, precio: 0 });
     const [mostrarFormulario, setMostrarFormulario] = useState(false);
 
-    // Funciones para usuarios
-    const suspenderUsuario = (id) => {
-        setUsuarios(usuarios.map(user =>
-            user.id === id ? { ...user, estado: user.estado === 'activo' ? 'suspendido' : 'activo' } : user
-        ));
+    useEffect(() => {
+        const fetchUsuarios = async () => {
+            if (!usuarioLogueado?.rol || usuarioLogueado.rol !== 'ROLE_ADMIN') {
+                return;
+            }
+
+            setLoadingUsuarios(true);
+            setAdminError('');
+
+            try {
+                const data = await apiService.listarUsuarios();
+                setUsuarios(data || []);
+            } catch (error) {
+                setAdminError(error.message);
+            } finally {
+                setLoadingUsuarios(false);
+            }
+        };
+
+        fetchUsuarios();
+    }, [usuarioLogueado]);
+
+    const eliminarUsuario = async (user_id) => {
+        const confirma = window.confirm('¿Deseas eliminar este usuario de forma permanente?');
+        if (!confirma) return;
+
+        try {
+            await apiService.eliminarUsuario(user_id);
+            setUsuarios((prev) => prev.filter((usuario) => usuario.user_id !== user_id));
+        } catch (error) {
+            setAdminError(error.message);
+        }
     };
 
-    const eliminarUsuario = (id) => {
-        setUsuarios(usuarios.filter(user => user.id !== id));
-    };
-
-    // Funciones para habitaciones
     const agregarHabitacion = (e) => {
         e.preventDefault();
         if (nuevaHabitacion.nombre && nuevaHabitacion.tipo) {
             setHabitaciones([...habitaciones, {
                 id: Math.max(...habitaciones.map(h => h.id), 0) + 1,
                 ...nuevaHabitacion,
-                capacidad: parseInt(nuevaHabitacion.capacidad),
+                capacidad: parseInt(nuevaHabitacion.capacidad, 10),
                 precio: parseFloat(nuevaHabitacion.precio)
             }]);
             setNuevaHabitacion({ nombre: '', tipo: '', capacidad: 2, precio: 0 });
@@ -59,15 +72,35 @@ function Admin() {
         setHabitaciones(habitaciones.filter(hab => hab.id !== id));
     };
 
+    if (!usuarioLogueado) {
+        return (
+            <div className="admin-container">
+                <div className="admin-header">
+                    <h1>Acceso denegado</h1>
+                    <p>Debes iniciar sesión como administrador para acceder a este panel.</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (usuarioLogueado.rol !== 'ROLE_ADMIN') {
+        return (
+            <div className="admin-container">
+                <div className="admin-header">
+                    <h1>No autorizado</h1>
+                    <p>Tu cuenta no tiene permisos para gestionar usuarios.</p>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="admin-container">
-            {/* Barra superior */}
             <div className="admin-header">
                 <h1>Panel de Administrador</h1>
                 <p>Gestiona usuarios, reservaciones y habitaciones del hotel</p>
             </div>
 
-            {/* Navegación */}
             <nav className="admin-nav">
                 <button
                     className={`nav-btn ${seccionActiva === 'usuarios' ? 'activo' : ''}`}
@@ -89,57 +122,55 @@ function Admin() {
                 </button>
             </nav>
 
-            {/* Contenido */}
             <div className="admin-content">
-                {/* Sección Usuarios */}
                 {seccionActiva === 'usuarios' && (
                     <div className="section">
                         <h2>Gestión de Usuarios</h2>
-                        <div className="usuarios-table">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Nombre</th>
-                                        <th>Email</th>
-                                        <th>Estado</th>
-                                        <th>Fecha Registro</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {usuarios.map(usuario => (
-                                        <tr key={usuario.id} className={`estado-${usuario.estado}`}>
-                                            <td>{usuario.nombre}</td>
-                                            <td>{usuario.email}</td>
-                                            <td>
-                                                <span className={`badge badge-${usuario.estado}`}>
-                                                    {usuario.estado === 'activo' ? 'Activo' : 'Suspendido'}
-                                                </span>
-                                            </td>
-                                            <td>{usuario.fecha}</td>
-                                            <td className="acciones">
-                                                <button
-                                                    className={`btn-accion ${usuario.estado === 'activo' ? 'suspender' : 'activar'}`}
-                                                    onClick={() => suspenderUsuario(usuario.id)}
-                                                >
-                                                    {usuario.estado === 'activo' ? 'Suspender' : 'Activar'}
-                                                </button>
-                                                <button
-                                                    className="btn-accion eliminar"
-                                                    onClick={() => eliminarUsuario(usuario.id)}
-                                                >
-                                                    Eliminar
-                                                </button>
-                                            </td>
+                        {adminError && <p className="error">{adminError}</p>}
+                        {loadingUsuarios ? (
+                            <p>Cargando usuarios...</p>
+                        ) : (
+                            <div className="usuarios-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Email</th>
+                                            <th>Usuario</th>
+                                            <th>Teléfono</th>
+                                            <th>Rol</th>
+                                            <th>Acciones</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
+                                    </thead>
+                                    <tbody>
+                                        {usuarios.map((usuario) => (
+                                            <tr key={usuario.user_id}>
+                                                <td>{usuario.name} {usuario.last_name}</td>
+                                                <td>{usuario.mail}</td>
+                                                <td>{usuario.username}</td>
+                                                <td>{usuario.phone}</td>
+                                                <td>
+                                                    <span className={`badge badge-${usuario.rol?.replace('ROLE_', '').toLowerCase()}`}>
+                                                        {usuario.rol || 'USER'}
+                                                    </span>
+                                                </td>
+                                                <td className="acciones">
+                                                    <button
+                                                        className="btn-accion eliminar"
+                                                        onClick={() => eliminarUsuario(usuario.user_id)}
+                                                    >
+                                                        Eliminar
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        )}
                     </div>
                 )}
 
-                {/* Sección Reservaciones */}
                 {seccionActiva === 'reservaciones' && (
                     <div className="section">
                         <h2>Gestión de Reservaciones</h2>
@@ -155,7 +186,7 @@ function Admin() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {reservaciones.map(reserva => (
+                                    {reservaciones.map((reserva) => (
                                         <tr key={reserva.id}>
                                             <td>{reserva.usuario}</td>
                                             <td>{reserva.habitacion}</td>
@@ -174,7 +205,6 @@ function Admin() {
                     </div>
                 )}
 
-                {/* Sección Habitaciones */}
                 {seccionActiva === 'habitaciones' && (
                     <div className="section">
                         <div className="habitaciones-header">
@@ -247,7 +277,7 @@ function Admin() {
                         )}
 
                         <div className="habitaciones-grid">
-                            {habitaciones.map(habitacion => (
+                            {habitaciones.map((habitacion) => (
                                 <div key={habitacion.id} className="habitacion-card">
                                     <div className="card-header">
                                         <h3>{habitacion.nombre}</h3>

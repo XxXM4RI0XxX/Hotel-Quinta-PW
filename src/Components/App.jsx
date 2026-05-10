@@ -186,7 +186,7 @@ function App() {
               <>
                 <span className="nav-sep"></span>
                 <button onClick={() => setPagina('perfil')} className={pagina === 'perfil' ? 'active' : ''}>Perfil</button>
-                
+
                 {/* Solo mostramos el botón de Admin si el rol es exactamente ROLE_ADMIN */}
                 {usuarioLogueado.rol === 'ROLE_ADMIN' && (
                   <>
@@ -194,10 +194,10 @@ function App() {
                     <button onClick={() => setPagina('admin')} className={pagina === 'admin' ? 'active' : ''}>Admin</button>
                   </>
                 )}
-                
+
                 <span className="nav-sep"></span>
-                <button 
-                  onClick={() => { setUsuarioLogueado(null); setPagina('inicio'); }} 
+                <button
+                  onClick={() => { setUsuarioLogueado(null); setPagina('inicio'); }}
                   style={{ color: '#c00', fontWeight: 'bold' }}
                 >
                   Salir
@@ -236,10 +236,10 @@ function App() {
           {pagina === 'nosotros' && <Nosotros />}
           {pagina === 'reservaciones' && <Reservaciones setPagina={setPagina} />}
           {pagina === 'consulta' && <Consulta setPagina={setPagina} />}
-          {pagina === 'login' && <Login setPagina={setPagina} setUsuarioLogueado={setUsuarioLogueado}/>}
+          {pagina === 'login' && <Login setPagina={setPagina} setUsuarioLogueado={setUsuarioLogueado} />}
           {pagina === 'registro' && <Registro setPagina={setPagina} />}
-          {pagina === 'perfil' && <Perfil />}
-          {pagina === 'admin' && <Admin />}
+          {pagina === 'perfil' && <Perfil usuarioLogueado={usuarioLogueado} setUsuarioLogueado={setUsuarioLogueado} />}
+          {pagina === 'admin' && <Admin usuarioLogueado={usuarioLogueado} />}
         </main>
 
         <Footer />
