@@ -19,6 +19,7 @@ function App() {
 
   const [pagina, setPagina] = useState('inicio');
   const { usuarioLogueado, setUsuarioLogueado, clearSession, isLoading } = useAuthPersistence();
+  const isAdmin = Boolean(usuarioLogueado?.rol?.toUpperCase().includes('ADMIN'));
 
   //Seleccion de fechas
 
@@ -207,8 +208,8 @@ function App() {
                     <span className="nav-sep"></span>
                     <button onClick={() => setPagina('perfil')} className={pagina === 'perfil' ? 'active' : ''}>Perfil</button>
 
-                    {/* Solo mostramos el botón de Admin si el rol es exactamente ROLE_ADMIN */}
-                    {usuarioLogueado.rol === 'ROLE_ADMIN' && (
+                    {/* Solo mostramos el botón de Admin si el rol incluye admin */}
+                    {isAdmin && (
                       <>
                         <span className="nav-sep"></span>
                         <button onClick={() => setPagina('admin')} className={pagina === 'admin' ? 'active' : ''}>Admin</button>
